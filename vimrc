@@ -251,3 +251,5 @@ let g:auto_save = 1
 
   " change cwd to current buffer
   nmap <silent> ,cd :lcd %:h<CR>
+
+  let g:neocomplcache_enable_at_startup = 1
