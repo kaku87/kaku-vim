@@ -4,11 +4,11 @@ If you do web dev a lot...yes
 ### Install
 1. clone the repo
 
-        git clone git://github.com/happypeter/peter-vim.git
+        git clone git://github.com/kaku87/kaku-vim.git
 
 1. rename it
 
-        mv peter-vim ~/.vim
+        mv kaku-vim ~/.vim
 
 1. set up `~/.vimrc`, have a fake `.vimrc` in your `$HOME`
 
