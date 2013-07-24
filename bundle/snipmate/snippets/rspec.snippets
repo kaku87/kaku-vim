@@ -1,0 +1,476 @@
+# SERVERSPEC - Resource Types | http://serverspec.org/resource_types.html
+#==============================
+# command
+#==============================
+snippet desco
+alias   descom
+abbr    describe command('whoami') do ~ end
+prev_word '^'
+        describe command('${1:whoami}') do
+          ${0}
+        end
+
+snippet ish
+alias   itsh
+abbr    it { should return_aaa 'bbb' }
+prev_word '^'
+        it { should ${0} }
+
+snippet rets
+alias   retso
+abbr    return_stdout(/8\.8\.8\.8/)
+        return_stdout(/${0:8\.8\.8\.8}/)
+
+snippet retse
+abbr    return_stderr(/No such file or directory/)
+        return_stderr(/${0:No such file or directory}/)
+
+snippet retx
+abbr    return_exit_status 0
+        return_exit_status ${0:0}
+
+#==============================
+# cron
+#==============================
+snippet descr
+abbr    describe cron do ~ end
+prev_word '^'
+        describe cron do
+          ${0}
+        end
+
+snippet haen
+alias   haveen
+abbr    have_entry "* * * * /usr/local/bin/foo"
+        have_entry "${0:* * * * /usr/local/bin/foo}"
+
+snippet wiu
+alias   withuser
+options word
+abbr    with_user('mizzy')
+        with_user('${0:root}')
+
+#==============================
+# default_gateway
+#==============================
+snippet desdef
+abbr    describe default_gateway do ~ end
+prev_word '^'
+        describe default_gateway do
+          its(:ipaddress) { should eq '${1:192.168.10.1}' }
+          its(:interface) { should eq '${0:br0}' }
+        end
+
+#==============================
+# file
+#==============================
+snippet desfi
+alias   desfile
+abbr    describe file('/etc/passwd') do ~ end
+prev_word '^'
+        describe file('${1:/etc/passwd}') do
+          ${0}
+        end
+
+snippet befi
+abbr    be_file
+        be_file
+
+snippet bedir
+abbr    be_directory
+        be_directory
+
+snippet beso
+alias   besock
+abbr    be_socket
+        be_socket
+
+snippet contain
+abbr    contain 'ServerName www.example.jp'
+        contain '${0}'
+
+snippet fromto
+options word
+abbr    from(/^group :test do/).to(/^end/)
+        from(/${1}/).to(/${0}/)
+
+snippet aa
+options word
+abbr    after(/^group :test do/)
+        after(${0})
+
+snippet bb
+options word
+abbr    before(/^group :test do/)
+        before(${0})
+
+snippet bemod
+alias   bemode
+abbr    be_mode 440
+        be_mode ${0:440}
+
+snippet beow
+alias   beowned
+abbr    be_owned_by 'root'
+        be_owned_by '${0:root}'
+
+snippet begr
+alias   begrped
+abbr    be_grouped_into 'wheel'
+        be_grouped_into '${0:wheel}'
+
+snippet belin
+alias   belinked
+abbr    be_linked_to '/etc/redhat-release'
+        be_linked_to '${0}'
+
+snippet bere
+alias   beread
+abbr    be_readable
+        be_readable
+
+snippet bewr
+alias   bewrit
+abbr    be_writable
+        be_writable
+
+snippet by
+options word
+abbr    {be_readable, be_writable, be_executable, ..}.by({'owner', 'group',
+'others', 'apache', ..})
+        by('${0}')
+
+snippet bex
+alias   beex
+abbr    be_executable
+        be_executable
+
+snippet bemou
+alias   bemount
+abbr    be_mounted
+        be_mounted
+
+snippet md5
+alias   matchmd5
+abbr    match_md5checksum '35435ea447c19f0ea5ef971837ab9ced'
+        match_md5checksum '${0}'
+
+#==============================
+# group
+#==============================
+snippet desgrp
+abbr    describe group('root') do ~ end
+prev_word '^'
+        describe group('${1:root}') do
+          ${0}
+        end
+
+snippet hagid
+alias   havegid
+abbr    have_gid 0
+        have_gid ${0:0}
+
+#==============================
+# group
+#==============================
+snippet deshost
+abbr    describe host('serverspec.org') do ~ end
+prev_word '^'
+        describe host('${1:serverspec.org}') do
+          ${0}
+        end
+
+snippet beres
+alias   bereso
+abbr    be_resolvable
+        be_resolvable
+
+snippet berea
+alias   bereachable
+abbr    be_reachable.with( :port => 22, :proto => 'tcp')
+        be_reachable.with( :port => ${1:22}, :proto => '${0:tcp}')
+
+#==============================
+# interface
+#==============================
+snippet desint
+alias   desif
+abbr    describe interface('eth0') do ~ end
+prev_word '^'
+        describe interface('${1:eth0}') do
+          ${0}
+        end
+
+#==============================
+# ipfilter
+#==============================
+snippet desip
+abbr    describe ipfilter do ~ end
+prev_word '^'
+        describe ipfilter do
+          ${0}
+        end
+
+snippet haverule
+alias   haru
+abbr    have_rule 'pass in quick on lo0 all'
+        have_rule '${0:pass in quick on lo0 all}'
+
+#==============================
+# ipnat
+#==============================
+snippet desnat
+alias   desipnat
+abbr    describe ipnat do ~ end
+prev_word '^'
+        describe ipnat do
+          ${0}
+        end
+
+#==============================
+# iptables
+#==============================
+snippet desipt
+alias   desiptables
+abbr    describe iptables do ~ end
+prev_word '^'
+        describe iptables do
+          ${0}
+        end
+
+#==============================
+# kernel_module
+#==============================
+snippet deskernel
+abbr    describe kernel_module('virtio_balloon') do ~ end
+prev_word '^'
+        describe kernel_module('${1:virtio_balloon}') do
+          ${0}
+        end
+
+snippet belo
+alias   beloaded
+abbr    be_loaded
+        be_loaded
+
+#==============================
+# linux_kernel_parameter
+#==============================
+snippet deslinuxkp
+abbr    describe 'Linux kernel parameters' do ~ end
+prev_word '^'
+        describe 'Linux kernel parameters' do
+          ${0}
+        end
+
+snippet conlinuxkp
+abbr    context linux_kernel_parameter('net.ipv4.tcp_syncookies') do ~ end
+prev_word '^'
+        context linux_kernel_parameter('${1:net.ipv4.tcp_syncookies}') do
+          its(:value) { should ${0} }
+        end
+
+#==============================
+# package
+#==============================
+snippet despkg
+abbr    describe package('httpd') do ~ end
+prev_word '^'
+        describe package('${1:httpd}') do
+          ${0}
+        end
+
+snippet despkgs
+abbr    %w(httpd httpd-devel).each do |pkg| describe package(pkg) do ~ end end
+prev_word '^'
+        %w(
+          ${1}
+        ).each do |pkg|
+          describe package(pkg) do
+            ${0}
+          end
+        end
+
+snippet desrpmpkg
+abbr    describe package('rpmforge-release') do
+.by('rpm').with_version('0.5.3-1.el6.rf.x86_64') end
+prev_word '^'
+        describe package('${1:rpmforge-release}') do
+          it { should
+be_installed.by('rpm').with_version('${0:0.5.3-1.el6.rf.x86_64}') }
+        end
+
+snippet bein
+alias   beinstall
+abbr    be_installed
+        be_installed
+
+snippet wiv
+alias   withver
+options word
+abbr    with_version('0.12.1')
+        with_version('${0:0.12.1}')
+
+#==============================
+# port
+#==============================
+snippet despo
+alias   desport
+abbr    describe port(80) do ~ end
+prev_word '^'
+        describe port(${1:80}) do
+          ${0}
+        end
+
+snippet belis
+alias   belisten
+abbr    be_listening
+        be_listening
+
+#==============================
+# routing_table
+#==============================
+snippet desrt
+abbr    describe routing_table do ~ end
+prev_word '^'
+        describe routing_table do
+          ${0}
+        end
+
+#==============================
+# selinux
+#==============================
+snippet dessel
+alias   desselinux
+abbr    describe selinux do ~ end
+prev_word '^'
+        describe selinux do
+          it { should ${0:be_disabled | be_enforcing | be_permissive}}
+        end
+
+snippet bedis
+alias   bedisable
+abbr    be_disabled
+        be_disabled
+
+snippet beenf
+alias   beenforc
+abbr    be_enforcing
+        be_enforcing
+
+snippet beperm
+alias   bepermiss
+abbr    be_permissive
+        be_permissive
+
+#==============================
+# service
+#==============================
+snippet desser
+abbr    describe service('ntpd') do ~ end
+prev_word '^'
+        describe service('${1:ntpd}') do
+          ${0}
+        end
+
+snippet been
+alias   beena
+abbr    be_enabled
+        be_enabled
+
+snippet wile
+alias   withlevel
+options word
+abbr    with_level(3)
+        with_level(${0:3})
+
+snippet beru
+alias   berun
+abbr    be_running
+        be_running
+
+snippet und
+alias   under
+options word
+abbr    under('supervisor')
+        under('${0:supervisor}')
+
+#==============================
+# user
+#==============================
+snippet desus
+alias   desuser
+abbr    describe user('root') do ~ end
+prev_word '^'
+        describe user('${1:root}') do
+          ${0}
+        end
+
+snippet ex
+abbr    exist
+        exist
+
+snippet btg
+alias   belong
+abbr    belongs_to_group 'apache'
+        belongs_to_group '${0:apache}'
+
+snippet hauid
+alias   haveuid
+abbr    have_uid 0
+        have_uid ${0:0}
+
+snippet haho
+alias   havehome
+abbr    have_home_directory '/root'
+        have_home_directory '${0:/root}'
+
+snippet halo
+alias   havelo
+abbr    have_login_shell '/bin/bash'
+        have_login_shell '${0:/bin/bash}'
+
+snippet haauth
+alias   haveauth
+abbr    have_authorized_key 'ssh-rsa ABCDE...CDEFGH foo@bar.local'
+        have_authorized_key '${0:ssh-rsa ABCDE...CDEFGH foo@bar.local}'
+
+#==============================
+# yumrepo
+#==============================
+snippet desyum
+alias   desyumrepo
+abbr    describe yumrepo('epel') do ~ end
+prev_word '^'
+        describe yumrepo('${0}') do
+          it { should exist }
+        end
+
+snippet desyums
+alias   desyumsrepo
+abbr    %w(epel rpmforge).each do |pkg| describe yumrepo(pkg) do ~ end end
+prev_word '^'
+        %w(
+          ${0}
+        ).each do |pkg|
+          describe yumrepo(pkg) do
+            it { should exist }
+          end
+        end
+
+#==============================
+# zfs
+#==============================
+snippet desz
+alias   deszfs
+abbr    describe zfs('rpool') do ~ end
+prev_word '^'
+        describe zfs('${1:rpool}') do
+          ${0}
+        end
+
+nippet hapro
+lias   haveprop
+bbr    have_property 'mountpoint' => '/rpool', 'compression' => 'off'
+       have_property 'mountpoint' => '${1:/rpool}', 'compression' =>
+${0:off}'
