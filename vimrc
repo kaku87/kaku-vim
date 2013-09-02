@@ -253,3 +253,20 @@ let g:auto_save = 1
   nmap <silent> ,cd :lcd %:h<CR>
 
   let g:neocomplcache_enable_at_startup = 1
+
+  let g:lightline = {
+      \ 'colorscheme': 'landscape',
+      \ 'active': {
+      \   'left': [
+      \       ['mode', 'paste'],
+      \       ['readonly', 'filename', 'modified', 'anzu']
+      \   ]
+      \ },
+      \ 'component_function': {
+      \   'anzu': 'anzu#search_status'
+      \ }
+      \ }
+  "}}}"
+  if !has('gui_running')
+    set t_Co=256
+  endif
