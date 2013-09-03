@@ -270,3 +270,6 @@ let g:auto_save = 1
   if !has('gui_running')
     set t_Co=256
   endif
+
+  set cursorline
+  set number
