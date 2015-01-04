@@ -17,6 +17,7 @@ If you do web dev a lot...yes
 1. you also need to install `Ctags`, `ack-grep`
 
         sudo apt-get install exuberant-ctags ack-grep # for ubuntu
+        sudo yum install Ctags ack # for centos
 
 1. Video about how I manage my plugins
 
